@@ -7,8 +7,8 @@ export interface IEditCharacterModal {
 
 export interface IEditForm {
   name: string;
-  birth_date: string;
-  planet: string;
+  birth_year: string;
+  homeworld: string;
   gender: string;
   height: string;
   mass: string;

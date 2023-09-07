@@ -16,11 +16,11 @@ const editForm = createForm<IEditForm>({
       init: '',
       rules: [rules.required(), rules.onlyNumbersAndLetters()],
     },
-    birth_date: {
+    birth_year: {
       init: '',
       rules: [rules.required(), editCharactersRules.checkBirthDate()],
     },
-    planet: {
+    homeworld: {
       init: '',
       rules: [rules.required(), rules.onlyNumbersAndLetters()],
     },
@@ -51,7 +51,7 @@ const editForm = createForm<IEditForm>({
 const cacheCharacterFx = createEffect<TCacheCharacterFx>(
   ({ info, form, cachedCharacters }) => {
     const newInfo = { ...info, ...form };
-    console.log(newInfo);
+
     if (cachedCharacters.some((item) => item.id === newInfo.id)) {
       const newCachedCharacters = cachedCharacters.map((item) =>
         item.id === newInfo.id ? newInfo : item,
@@ -86,8 +86,8 @@ sample({
     const newInfo = cachedCharacter ?? info;
     return {
       name: newInfo.name,
-      birth_date: newInfo.birth_year,
-      planet: planet.name,
+      birth_year: newInfo.birth_year,
+      homeworld: cachedCharacter ? cachedCharacter.homeworld : planet.name,
       gender: newInfo.gender,
       height: newInfo.height,
       mass: newInfo.mass,

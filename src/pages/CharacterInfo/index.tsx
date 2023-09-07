@@ -9,6 +9,8 @@ import {
 import {
   characterInfoContainerSx,
   characterInfoImageBoxSx,
+  characterInfoImageContainerStyle,
+  characterInfoImageStyle,
   characterInfoNameSx,
   characterInfoParamSx,
 } from './style';
@@ -21,6 +23,7 @@ import { planetModel } from 'entities/Planet/model';
 import { Edit } from '@mui/icons-material';
 import { editCharacterModalModel } from 'features/EditCharacterModal/model';
 import { charactersModel } from 'entities/Characters/model';
+import { Image } from 'shared/ui/Image';
 
 export const CharacterInfo: FC = () => {
   const theme = useTheme();
@@ -52,11 +55,14 @@ export const CharacterInfo: FC = () => {
         borderRadius="8px"
         bgcolor={theme.custom.card.backgroundColor}
         boxShadow={theme.custom.card.boxShadow}
-        sx={{
-          ...characterInfoImageBoxSx,
-          backgroundImage: `url(${info?.image ? info.image : NoImage})`,
-        }}
-      />
+        sx={characterInfoImageBoxSx}>
+        <Image
+          alt={`${info?.name}_photo`}
+          src={info || infoIsPending ? info?.image : NoImage}
+          containerStyle={characterInfoImageContainerStyle}
+          style={characterInfoImageStyle}
+        />
+      </Box>
       {!infoIsPending ? (
         <Box
           flex="1"

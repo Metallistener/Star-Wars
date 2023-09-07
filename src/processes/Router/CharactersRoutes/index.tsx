@@ -1,6 +1,5 @@
 import React, { Suspense, lazy } from 'react';
 import { EditCharacterModal } from 'features/EditCharacterModal';
-import { PlanetModal } from 'features/PlanetModal';
 import { Route, Switch } from 'react-router-dom';
 import { endPoints } from 'shared/config/endPoints';
 
@@ -31,7 +30,6 @@ export const Characters = () => {
           </Suspense>
         </Route>
       </Switch>
-      <PlanetModal />
       <EditCharacterModal />
     </>
   );

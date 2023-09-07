@@ -8,15 +8,8 @@ const StyledCardGrid = styled(Grid)`
   }
 
   &:hover img {
-    object-fit: contain;
+    object-fit: contain !important;
   }
-`;
-
-const CardImage = styled('img')`
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 8px;
 `;
 
 const nameSx: SxProps<Theme> = {
@@ -25,4 +18,4 @@ const nameSx: SxProps<Theme> = {
   marginBottom: '5px',
 };
 
-export { CardImage, StyledCardGrid, nameSx };
+export { StyledCardGrid, nameSx };

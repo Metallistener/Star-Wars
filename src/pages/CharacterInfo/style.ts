@@ -8,12 +8,17 @@ const characterInfoContainerSx: SxProps<Theme> = {
 
 const characterInfoImageBoxSx: SxProps<Theme> = {
   aspectRatio: 0.7,
+  borderRadius: '8px',
+  overflow: 'hidden',
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   '&:hover': {
     backgroundSize: 'contain',
   },
+  '&:hover img': {
+    objectFit: 'contain !important'
+  }
 };
 
 const characterInfoNameSx: SxProps<Theme> = {
@@ -32,9 +37,21 @@ const characterInfoParamSx: SxProps<Theme> = {
   },
 };
 
+const characterInfoImageContainerStyle: React.CSSProperties = {
+  height: '100%',
+};
+
+const characterInfoImageStyle: React.CSSProperties = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+};
+
 export {
   characterInfoContainerSx,
   characterInfoImageBoxSx,
   characterInfoNameSx,
   characterInfoParamSx,
+  characterInfoImageContainerStyle,
+  characterInfoImageStyle,
 };
