@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useUnit } from 'effector-react';
 import { theme } from 'shared/theme/model/theme';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -7,9 +7,15 @@ import { ThemeProvider } from '@mui/material/styles';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { AppErrorBoundary } from 'shared/ui/ErrorBoundaryFallback';
 import { Toast } from 'shared/ui/Toast';
+import { checkOnlineBrowserState } from 'shared/model/connection';
 
 const App = () => {
   const activeTheme = useUnit(theme.stores.$theme);
+
+  useEffect(() => {
+    checkOnlineBrowserState();
+  }, []);
+
   return (
     <ThemeProvider theme={activeTheme.theme}>
       <GlobalStyles

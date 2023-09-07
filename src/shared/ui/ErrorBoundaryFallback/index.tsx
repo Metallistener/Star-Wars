@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { StyledContainer } from './style';
 import { Text } from '../Text';
 import { Button } from '@mui/material';
+import {
+  ErrorBoundaryFallbackProps,
+  ErrorBoundaryFallbackState,
+} from './types';
 
 export class AppErrorBoundary extends Component<
-  { children: React.ReactNode },
-  { hasError: boolean }
+  ErrorBoundaryFallbackProps,
+  ErrorBoundaryFallbackState
 > {
   constructor(props) {
     super(props);
