@@ -8,9 +8,12 @@ import {
 } from '@mui/material';
 import {
   characterInfoContainerSx,
+  characterInfoDescPendingSx,
+  characterInfoDescSx,
   characterInfoImageBoxSx,
   characterInfoImageContainerStyle,
   characterInfoImageStyle,
+  characterInfoNameBoxSx,
   characterInfoNameSx,
   characterInfoParamSx,
 } from './style';
@@ -71,11 +74,13 @@ export const CharacterInfo: FC = () => {
           minHeight="350px"
           marginLeft="20px"
           bgcolor={theme.custom.card.backgroundColor}
-          boxShadow={theme.custom.card.boxShadow}>
+          boxShadow={theme.custom.card.boxShadow}
+          sx={characterInfoDescSx}>
           <Box
             display="flex"
             justifyContent="space-between"
-            alignItems="flex-start">
+            alignItems="flex-start"
+            sx={characterInfoNameBoxSx}>
             <Text sx={characterInfoNameSx}>
               <span>{data?.name}</span>
             </Text>
@@ -124,7 +129,8 @@ export const CharacterInfo: FC = () => {
           alignItems="center"
           display="flex"
           bgcolor={theme.custom.card.backgroundColor}
-          boxShadow={theme.custom.card.boxShadow}>
+          boxShadow={theme.custom.card.boxShadow}
+          sx={characterInfoDescPendingSx}>
           <CircularProgress size={30} />
         </Box>
       )}

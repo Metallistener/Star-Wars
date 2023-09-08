@@ -31,6 +31,7 @@ export const EditCharacterModal: FC = () => {
         padding="40px"
         paddingTop="0"
         maxWidth='420px'
+        width='100%'
         bgcolor={theme.palette.background.default}
         sx={modalBoxCenterSx}>
         <ModalHeader

@@ -4,6 +4,10 @@ const characterInfoContainerSx: SxProps<Theme> = {
   display: 'flex',
   alignItems: 'flex-start',
   paddingTop: '40px',
+  '@media (max-width: 650px)': {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
 };
 
 const characterInfoImageBoxSx: SxProps<Theme> = {
@@ -17,8 +21,30 @@ const characterInfoImageBoxSx: SxProps<Theme> = {
     backgroundSize: 'contain',
   },
   '&:hover img': {
-    objectFit: 'contain !important'
-  }
+    objectFit: 'contain !important',
+  },
+};
+
+const characterInfoDescSx: SxProps<Theme> = {
+  '@media (max-width: 650px)': {
+    paddingTop: '180px',
+    marginLeft: 0,
+    marginTop: '-160px',
+    width: '90%',
+    textAlign: 'center',
+  },
+};
+
+const characterInfoDescPendingSx: SxProps<Theme> = {
+  marginLeft: 0,
+  marginTop: '-160px',
+  width: '90%',
+};
+
+const characterInfoNameBoxSx: SxProps<Theme> = {
+  '@media (max-width: 650px)': {
+    justifyContent: 'center',
+  },
 };
 
 const characterInfoNameSx: SxProps<Theme> = {
@@ -49,7 +75,10 @@ const characterInfoImageStyle: React.CSSProperties = {
 
 export {
   characterInfoContainerSx,
+  characterInfoDescSx,
+  characterInfoDescPendingSx,
   characterInfoImageBoxSx,
+  characterInfoNameBoxSx,
   characterInfoNameSx,
   characterInfoParamSx,
   characterInfoImageContainerStyle,
