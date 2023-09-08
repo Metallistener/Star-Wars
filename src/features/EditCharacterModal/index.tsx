@@ -30,8 +30,8 @@ export const EditCharacterModal: FC = () => {
         borderRadius="8px"
         padding="40px"
         paddingTop="0"
-        maxWidth='420px'
-        width='100%'
+        maxWidth="420px"
+        width="100%"
         bgcolor={theme.palette.background.default}
         sx={modalBoxCenterSx}>
         <ModalHeader
@@ -41,6 +41,7 @@ export const EditCharacterModal: FC = () => {
         <form onSubmit={editCharacterModalHandlers.onSubmit}>
           {editFields.map((field) => (
             <TextField
+              key={field}
               label={field.replace('_', ' ')}
               variant="outlined"
               fullWidth
@@ -65,7 +66,12 @@ export const EditCharacterModal: FC = () => {
               onChange={editCharacterModalHandlers.onChange(field)}
             />
           ))}
-          <Button fullWidth variant='contained' color="primary" size="large" type="submit">
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit">
             Save changes
           </Button>
         </form>

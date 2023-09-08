@@ -10,7 +10,7 @@ const StyledContainer = styled(Container)`
   align-items: center;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.custom.header.backgroundColor};
-  box-shadow: ${({ theme }) => `0 5px 20px ${setAlpha('#000000', 0.05)}`};
+  box-shadow: ${`0 5px 20px ${setAlpha('#000000', 0.05)}`};
 `;
 
 const titleSx: SxProps<Theme> = { fontSize: '28px', marginLeft: '15px' };

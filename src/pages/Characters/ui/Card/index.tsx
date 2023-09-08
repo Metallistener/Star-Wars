@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { endPoints } from 'shared/config/endPoints';
 import { Image } from 'shared/ui/Image';
 
-export const Card: FC<ICardProps> = ({ data, index }) => {
+export const Card: FC<ICardProps> = ({ data }) => {
   const theme = useTheme();
   const id = data.url.match(/[0-9]+/)[0];
   return (

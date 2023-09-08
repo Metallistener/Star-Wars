@@ -22,7 +22,7 @@ export const Routes: FC = () => {
       <Header />
       <NetworkErrorBoundaryFallback>
         <Switch>
-          <Route exact path={[endPoints.CHARACTERS, endPoints.CHARACTER_INFO]}>
+          <Route exact path={[endPoints.DEFAULT_PAGE, endPoints.CHARACTER_INFO]}>
             <Suspense fallback={<CircularProgress />}>
               <Characters />
             </Suspense>

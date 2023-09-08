@@ -8,7 +8,7 @@ export const Characters: FC = () => {
   const [characters] = useUnit([charactersModel.characters.stores.$characters]);
 
   useEffect(() => {
-    if (!Boolean(characters || characters?.results?.length))
+    if (!(characters || characters?.results?.length))
       charactersModel.characters.events.getCharacters();
   }, []);
 

@@ -24,16 +24,16 @@ export const Content: FC = () => {
       charactersModel.search.stores.$searchIsPending,
     ]);
   const { fields } = useForm(charactersModel.search.stores.searchForm);
-  const isLoadMoreShown = Boolean(fields.search.value.length)
+  const isLoadMoreShown = fields.search.value.length
     ? searchResult && searchResult?.next
     : characters && characters?.next;
 
   if (
     (Boolean(fields.search.value) &&
       !searchIsPending &&
-      !Boolean(searchResult || searchResult?.results?.length)) ||
+      !(searchResult || searchResult?.results?.length)) ||
     (!charactersIsPending &&
-      !Boolean(characters || characters?.results?.length))
+      !(characters || characters?.results?.length))
   )
     return (
       <Container sx={emptyResultContainerSx}>
@@ -44,8 +44,8 @@ export const Content: FC = () => {
 
   if (
     (searchIsPending &&
-      !Boolean(searchResult || searchResult?.results?.length)) ||
-    (charactersIsPending && !Boolean(characters || characters?.results?.length))
+      !(searchResult || searchResult?.results?.length)) ||
+    (charactersIsPending && !(characters || characters?.results?.length))
   )
     return (
       <Container sx={isLoadingContainerSx}>
@@ -57,7 +57,7 @@ export const Content: FC = () => {
   return (
     <>
       <Grid container sx={contentContainerSx}>
-        {(Boolean(fields.search.value)
+        {(fields.search.value
           ? searchResult
           : characters
         )?.results?.map((char, index) => (

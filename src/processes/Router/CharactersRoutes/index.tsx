@@ -19,7 +19,7 @@ export const Characters = () => {
   return (
     <>
       <Switch>
-        <Route exact path={endPoints.CHARACTERS}>
+        <Route exact path={endPoints.DEFAULT_PAGE}>
           <Suspense fallback={<React.Fragment />}>
             <CharactersList />
           </Suspense>

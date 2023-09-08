@@ -23,7 +23,7 @@ sample({
 sample({
   clock: getCharactersFx.done,
   source: $characters,
-  filter: (_, { params }) => !Boolean(params?.search),
+  filter: (_, { params }) => !params?.search,
   fn: (state, { params, result: newResults }) =>
     params?.next
       ? {

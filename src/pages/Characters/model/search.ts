@@ -2,7 +2,6 @@ import {
   createEffect,
   createEvent,
   createStore,
-  forward,
   sample,
 } from 'effector';
 import { createForm } from 'effector-forms';

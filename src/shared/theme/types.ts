@@ -1,7 +1,5 @@
-import { CSSProp } from 'styled-components';
 import { EThemeTypes } from '../config/enums';
 import { ITheme } from 'shared/types/theme';
-import { Theme } from '@mui/material';
 
 export type TSetThemeFx = (mode: EThemeTypes) => ITheme;
 
