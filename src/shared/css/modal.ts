@@ -6,6 +6,8 @@ export const modalBoxCenterSx: SxProps<Theme> = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   outline: 'none',
+  maxHeight: '90%',
+  overflowY: 'auto',
   '@media (max-width: 550px)': {
     maxWidth: '320px',
   },
