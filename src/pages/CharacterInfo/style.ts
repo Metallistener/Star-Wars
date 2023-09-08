@@ -36,9 +36,11 @@ const characterInfoDescSx: SxProps<Theme> = {
 };
 
 const characterInfoDescPendingSx: SxProps<Theme> = {
-  marginLeft: 0,
-  marginTop: '-160px',
-  width: '90%',
+  '@media (max-width: 650px)': {
+    marginLeft: 0,
+    marginTop: '-160px',
+    width: '90%',
+  },
 };
 
 const characterInfoNameBoxSx: SxProps<Theme> = {
