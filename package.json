@@ -37,7 +37,6 @@
     "webpack-manifest-plugin": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "dev": "webpack serve",
     "build": "webpack",
     "test": "react-scripts test",
