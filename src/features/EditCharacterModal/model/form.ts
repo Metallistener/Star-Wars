@@ -5,7 +5,7 @@ import { editCharactersRules } from '../lib/rules';
 import { createEffect, forward, sample } from 'effector';
 import { modal } from './modal';
 import { planetModel } from 'entities/Planet/model';
-import { charactersModel } from 'entities/Characters/model';
+import { cachedCharactersModel } from 'entities/Characters/model';
 import { CACHED_EDITED_CHARACTERS } from 'shared/config/constants';
 import { toastModel } from 'shared/ui/Toast/model';
 import { IToastMessage } from 'shared/ui/Toast/types';
@@ -14,7 +14,7 @@ const editForm = createForm<IEditForm>({
   fields: {
     name: {
       init: '',
-      rules: [rules.required(), rules.onlyNumbersAndLetters()],
+      rules: [rules.required(), editCharactersRules.checkName()],
     },
     birth_year: {
       init: '',
@@ -22,7 +22,7 @@ const editForm = createForm<IEditForm>({
     },
     homeworld: {
       init: '',
-      rules: [rules.required(), rules.onlyNumbersAndLetters()],
+      rules: [rules.required(), rules.listing()],
     },
     gender: {
       init: '',
@@ -38,11 +38,11 @@ const editForm = createForm<IEditForm>({
     },
     eye_color: {
       init: '',
-      rules: [rules.required(), rules.onlyNumbersAndLetters()],
+      rules: [rules.required(), rules.listing()],
     },
     skin_color: {
       init: '',
-      rules: [rules.required(), rules.onlyNumbersAndLetters()],
+      rules: [rules.required(), rules.listing()],
     },
   },
   validateOn: ['change', 'submit'],
@@ -76,7 +76,7 @@ sample({
   clock: modal.$store,
   source: {
     planet: planetModel.stores.$planet,
-    cachedCharacters: charactersModel.stores.$cachedCharacters,
+    cachedCharacters: cachedCharactersModel.stores.$cachedCharacters,
   },
   filter: (_, state) => Boolean(state?.isOpen && state?.info),
   fn: ({ planet, cachedCharacters }, { info }): IEditForm => {
@@ -102,7 +102,7 @@ sample({
   clock: editForm.formValidated,
   source: {
     modalStore: modal.$store,
-    cachedCharacters: charactersModel.stores.$cachedCharacters,
+    cachedCharacters: cachedCharactersModel.stores.$cachedCharacters,
   },
   fn: ({ modalStore, cachedCharacters }, form) => ({
     info: modalStore.info,
@@ -114,7 +114,7 @@ sample({
 
 forward({
   from: cacheCharacterFx.doneData,
-  to: charactersModel.events.setCachedCharacters,
+  to: cachedCharactersModel.events.setCachedCharacters,
 });
 
 sample({

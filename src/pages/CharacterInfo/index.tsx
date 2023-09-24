@@ -25,7 +25,7 @@ import { Text } from 'shared/ui/Text';
 import { planetModel } from 'entities/Planet/model';
 import { Edit } from '@mui/icons-material';
 import { editCharacterModalModel } from 'features/EditCharacterModal/model';
-import { charactersModel } from 'entities/Characters/model';
+import { cachedCharactersModel } from 'entities/Characters/model';
 import { Image } from 'shared/ui/Image';
 
 export const CharacterInfo: FC = () => {
@@ -35,13 +35,11 @@ export const CharacterInfo: FC = () => {
     characterInfoModel.info.stores.$info,
     characterInfoModel.info.stores.$infoIsPending,
     planetModel.stores.$planetIsPending,
-    charactersModel.stores.$cachedCharacters,
+    cachedCharactersModel.stores.$cachedCharacters,
   ]);
   const data = cachedCharacters.find((item) => item.id === info?.id) ?? info;
 
   useEffect(() => {
-    charactersModel.events.getCachedCharacters();
-
     if (params?.id)
       characterInfoModel.info.events.getCharacterInfo(Number(params.id));
 

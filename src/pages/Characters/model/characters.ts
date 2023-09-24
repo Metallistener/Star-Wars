@@ -5,6 +5,7 @@ import { IGetCharactersNext, TGetCharactersFx } from '../types';
 import CharactersJson from 'shared/api/characters.json';
 import { IToastMessage } from 'shared/ui/Toast/types';
 import { toastModel } from 'shared/ui/Toast/model';
+import { cachedCharactersModel } from 'entities/Characters/model';
 
 const $characters = createStore<ICharacters>(null);
 const getCharacters = createEvent<IGetCharactersNext>();
@@ -22,30 +23,55 @@ sample({
 
 sample({
   clock: getCharactersFx.done,
-  source: $characters,
+  source: {
+    $characters,
+    cachedCharacters: cachedCharactersModel.stores.$cachedCharacters,
+  },
   filter: (_, { params }) => !params?.search,
-  fn: (state, { params, result: newResults }) =>
-    params?.next
-      ? {
-          ...newResults.data,
-          results: [...state.results, ...newResults.data.results]
-            .map((item) => ({
-              ...item,
-              image: CharactersJson.find((char) => char.name === item.name)
-                ?.image,
-            }))
-            .map((item, index) => ({ ...item, id: index + 1 })),
-        }
-      : {
-          ...newResults.data,
-          results: newResults.data.results
-            .map((item) => ({
-              ...item,
-              image: CharactersJson.find((char) => char.name === item.name)
-                ?.image,
-            }))
-            .map((item, index) => ({ ...item, id: index + 1 })),
-        },
+  fn: (
+    { $characters, cachedCharacters },
+    { params, result: newResults },
+  ): ICharacters => ({
+    ...newResults.data,
+    results: (params?.next
+      ? [...$characters.results, ...newResults.data.results]
+      : newResults.data.results
+    ).map((item) => {
+      const charId = Number(item.url.match(/[0-9]+/)[0]);
+      return {
+        ...item,
+        id: charId,
+        origin_name: item.name,
+        name:
+          cachedCharacters?.find((cachedItem) => cachedItem.id === charId)
+            ?.name || item.name,
+        image: CharactersJson.find((char) => char.name === item.name)?.image,
+      };
+    }),
+  }),
+  target: $characters,
+});
+
+sample({
+  clock: cachedCharactersModel.stores.$cachedCharacters,
+  source: $characters,
+  filter: (characters, cachedCharacters) =>
+    Boolean(characters && characters.results.length && cachedCharacters.length),
+  fn: (characters, cachedCharacters): ICharacters => ({
+    ...characters,
+    results: characters.results.map((item) => {
+      const charId = Number(item.url.match(/[0-9]+/)[0]);
+      return {
+        ...item,
+        id: charId,
+        name:
+          cachedCharacters?.find((cachedItem) => cachedItem.id === charId)
+            ?.name || item.name,
+        image: CharactersJson.find((char) => char.name === item.origin_name)
+          ?.image,
+      };
+    }),
+  }),
   target: $characters,
 });
 

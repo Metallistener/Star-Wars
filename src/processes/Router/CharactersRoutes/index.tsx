@@ -1,7 +1,8 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { EditCharacterModal } from 'features/EditCharacterModal';
 import { Route, Switch } from 'react-router-dom';
 import { endPoints } from 'shared/config/endPoints';
+import { cachedCharactersModel } from 'entities/Characters/model';
 
 const CharactersList = lazy(() =>
   import('pages/Characters').then(({ Characters }) => ({
@@ -16,6 +17,10 @@ const CharacterInfo = lazy(() =>
 );
 
 export const Characters = () => {
+  useEffect(() => {
+    cachedCharactersModel.events.getCachedCharacters();
+  }, []);
+
   return (
     <>
       <Switch>

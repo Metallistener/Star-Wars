@@ -1,4 +1,4 @@
-import { BIRTH_DATE, GENDER } from '../config';
+import { BIRTH_DATE, GENDER, NAME } from '../config';
 
 export const editCharactersRules = {
   checkGender: () => ({
@@ -6,7 +6,7 @@ export const editCharactersRules = {
     validator: (value: string) => {
       return {
         isValid: new RegExp(GENDER).test(value) || value === '',
-        errorText: 'Field can only contain [0-9a-zA-Z/_ ]',
+        errorText: 'Field can only contain [A-Za-z0-9-_/. ]',
       };
     },
   }),
@@ -15,7 +15,16 @@ export const editCharactersRules = {
     validator: (value: string) => {
       return {
         isValid: new RegExp(BIRTH_DATE).test(value) || value === '',
-        errorText: 'Field can only contain [0-9a-zA-Z. ]',
+        errorText: 'Field can only contain [A-Za-z0-9-. ]',
+      };
+    },
+  }),
+  checkName: () => ({
+    name: 'checkName',
+    validator: (value: string) => {
+      return {
+        isValid: new RegExp(NAME).test(value) || value === '',
+        errorText: 'Allowed symbols [A-Za-z0-9-_. ]',
       };
     },
   }),

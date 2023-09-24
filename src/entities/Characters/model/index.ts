@@ -27,7 +27,7 @@ forward({
   to: $cachedCharacters,
 });
 
-export const charactersModel = {
+export const cachedCharactersModel = {
   stores: { $cachedCharacters },
   events: { getCachedCharacters, setCachedCharacters },
 };

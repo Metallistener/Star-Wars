@@ -1,22 +1,17 @@
-import {
-  createEffect,
-  createEvent,
-  createStore,
-  sample,
-} from 'effector';
+import { createEffect, createEvent, createStore, sample } from 'effector';
 import { createForm } from 'effector-forms';
-import { rules } from 'shared/lib/rules';
 import { ICharacters } from 'shared/types/api/characters';
 import { IGetCharactersNext, TGetCharactersFx } from '../types';
 import { fetchCharacters } from 'shared/api/characters';
 import CharactersJson from 'shared/api/characters.json';
 import { debounce } from 'patronum';
+import { searchRules } from '../lib/rules';
 
 const searchForm = createForm<{ search: string }>({
   fields: {
     search: {
       init: '',
-      rules: [rules.onlyNumbersAndLetters()],
+      rules: [searchRules.search()],
     },
   },
   validateOn: ['change', 'submit'],

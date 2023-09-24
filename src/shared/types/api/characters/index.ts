@@ -18,6 +18,7 @@ export interface ICharacters {
 
 export interface ICharacter {
   id: number;
+  origin_name: string;
   name: string;
   height: string;
   mass: string;

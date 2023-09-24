@@ -28,13 +28,7 @@ export const Content: FC = () => {
     ? searchResult && searchResult?.next
     : characters && characters?.next;
 
-  if (
-    (Boolean(fields.search.value) &&
-      !searchIsPending &&
-      !(searchResult || searchResult?.results?.length)) ||
-    (!charactersIsPending &&
-      !(characters || characters?.results?.length))
-  )
+  if (!charactersIsPending && !(characters && characters?.results?.length))
     return (
       <Container sx={emptyResultContainerSx}>
         <Svg idIcon="icNoResult" width={150} height={150} />
@@ -43,8 +37,19 @@ export const Content: FC = () => {
     );
 
   if (
-    (searchIsPending &&
-      !(searchResult || searchResult?.results?.length)) ||
+    Boolean(fields.search.value) &&
+    !searchIsPending &&
+    !(searchResult && searchResult?.results?.length)
+  )
+    return (
+      <Container sx={emptyResultContainerSx}>
+        <Svg idIcon="icNoResult" width={150} height={150} />
+        <Text sx={emptyResultTitleSx}>Empty search result</Text>
+      </Container>
+    );
+
+  if (
+    (searchIsPending && !(searchResult || searchResult?.results?.length)) ||
     (charactersIsPending && !(characters || characters?.results?.length))
   )
     return (
@@ -57,12 +62,11 @@ export const Content: FC = () => {
   return (
     <>
       <Grid container sx={contentContainerSx}>
-        {(fields.search.value
-          ? searchResult
-          : characters
-        )?.results?.map((char, index) => (
-          <Card key={char.url} data={char} index={index + 1} />
-        ))}
+        {(fields.search.value ? searchResult : characters)?.results?.map(
+          (char, index) => (
+            <Card key={char.url} data={char} index={index + 1} />
+          ),
+        )}
       </Grid>
       {isLoadMoreShown && (
         <Box

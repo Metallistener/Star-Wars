@@ -1,5 +1,6 @@
 import { Rule } from 'effector-forms';
 import {
+  LISTING,
   ONLY_NUMBERS,
   ONLY_NUMBERS_LETTERS_SPACES,
   REQUIRED,
@@ -15,13 +16,12 @@ export const rules = {
       }),
     };
   },
-  onlyNumbersAndLetters: () => ({
-    name: 'onlyNumbersAndLetters',
+  listing: () => ({
+    name: 'listing',
     validator: (value: string) => {
       return {
-        isValid:
-          new RegExp(ONLY_NUMBERS_LETTERS_SPACES).test(value) || value === '',
-        errorText: 'Field can only contain numbers and letters',
+        isValid: new RegExp(LISTING).test(value) || value === '',
+        errorText: 'Allowed symbols [A-Za-z0-9 ,]',
       };
     },
   }),
@@ -30,7 +30,7 @@ export const rules = {
     validator: (value: string) => {
       return {
         isValid: new RegExp(ONLY_NUMBERS).test(value) || value === '',
-        errorText: 'Field can only contain numbers',
+        errorText: 'Allowed symbols [0-9 ]',
       };
     },
   }),
