@@ -1,3 +1,5 @@
+**npm run dev** - запускает проект локально при помощи Webpack сборщика
+
 Структа приложения постоена с помощью FSD (Feature-Sliced Design) Pattern:
 
     - src
